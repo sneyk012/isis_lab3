@@ -6,9 +6,17 @@ services:
     command: python ./server.py
     ports:
       - 1234:1234
+  
   client:
     build: client/
     command: python ./client.py
     network_mode: host
     depends_on:
       - server
+  
+  bd:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: example
